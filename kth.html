@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kth Largest and Smallest Number</title>
+</head>
+<body>
+    <h1>Kth Largest and Smallest Number</h1>
+
+    <div>
+        Enter an array of numbers (comma-separated):
+        <input type="text" id="inputArray">
+    </div>
+
+    <div>
+        Enter the value of k:
+        <input type="number" id="kValue">
+    </div>
+
+    <button onclick="findKthLargestAndSmallest()">Find Kth Largest and Smallest</button>
+
+    <div id="result"></div>
+
+    <script>
+        function findKthLargestAndSmallest() {
+            const inputArrayStr = document.getElementById('inputArray').value;
+            const k = parseInt(document.getElementById('kValue').value);
+
+            // Parse the input string into an array of numbers
+            const inputArray = inputArrayStr.split(',').map(Number);
+
+            if (!Array.isArray(inputArray) || inputArray.some(isNaN) || k < 1 || k > inputArray.length) {
+                document.getElementById('result').textContent = 'Invalid input. Please enter a valid array and k value.';
+                return;
+            }
+
+            // Sort the array in ascending order to find kth smallest
+            const sortedArray = [...inputArray].sort((a, b) => a - b);
+            const kthSmallest = sortedArray[k - 1];
+
+            // Sort the array in descending order to find kth largest
+            const reversedArray = [...inputArray].sort((a, b) => b - a);
+            const kthLargest = reversedArray[k - 1];
+
+            document.getElementById('result').textContent = `Kth Smallest: ${kthSmallest}, Kth Largest: ${kthLargest}`;
+        }
+    </script>
+</body>
+</html>

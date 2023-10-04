@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Divide Array</title>
+</head>
+<body>
+    <h1>Divide Array</h1>
+
+    <button onclick="divideArray()">Divide Array</button>
+
+    <div id="originalArray">
+        Original Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    </div>
+
+    <div id="array1">
+        Array 1:
+    </div>
+
+    <div id="array2">
+        Array 2:
+    </div>
+
+    <script>
+        function divideArray() {
+            // Original array
+            const originalArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+            // Calculate the midpoint to divide the array into two parts
+            const midpoint = Math.ceil(originalArray.length / 2);
+
+            // Split the original array into two arrays
+            const array1 = originalArray.slice(0, midpoint);
+            const array2 = originalArray.slice(midpoint);
+
+            // Display the divided arrays
+            document.getElementById('array1').textContent = 'Array 1: ' + array1;
+            document.getElementById('array2').textContent = 'Array 2: ' + array2;
+        }
+    </script>
+</body>
+</html>

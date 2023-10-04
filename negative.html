@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Move Negative Elements</title>
+</head>
+<body>
+    <h1>Move Negative Elements to One Side</h1>
+
+    <div>
+        Enter an array of numbers (comma-separated):
+        <input type="text" id="inputArray">
+    </div>
+
+    <button onclick="moveNegativeElements()">Move Negative Elements</button>
+
+    <div id="result"></div>
+
+    <script>
+        function moveNegativeElements() {
+            const inputArrayStr = document.getElementById('inputArray').value;
+
+            // Parse the input string into an array of numbers
+            const inputArray = inputArrayStr.split(',').map(Number);
+
+            if (!Array.isArray(inputArray) || inputArray.some(isNaN)) {
+                document.getElementById('result').textContent = 'Invalid input. Please enter a valid array.';
+                return;
+            }
+
+            // Partition the array by moving negative elements to one side
+            const partitionedArray = partitionNegativeElements(inputArray);
+
+            document.getElementById('result').textContent = `Modified Array: [${partitionedArray.join(', ')}]`;
+        }
+
+        function partitionNegativeElements(arr) {
+            const n = arr.length;
+            let left = 0;
+            let right = n - 1;
+
+            while (left <= right) {
+                if (arr[left] < 0 && arr[right] < 0) {
+                    left++;
+                } else if (arr[left] < 0 && arr[right] >= 0) {
+                    left++;
+                    right--;
+                } else if (arr[left] >= 0 && arr[right] < 0) {
+                    const temp = arr[left];
+                    arr[left] = arr[right];
+                    arr[right] = temp;
+                    left++;
+                    right--;
+                } else {
+                    right--;
+                }
+            }
+
+            return arr;
+        }
+    </script>
+</body>
+</html>

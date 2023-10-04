@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find Non-Repeating Elements</title>
+</head>
+<body>
+    <h1>Find Non-Repeating Elements</h1>
+
+    <div>
+        Enter an array of numbers (comma-separated):
+        <input type="text" id="inputArray">
+    </div>
+
+    <button onclick="findNonRepeatingElements()">Find Non-Repeating Elements</button>
+
+    <div id="result"></div>
+
+    <script>
+        function findNonRepeatingElements() {
+            const inputArrayStr = document.getElementById('inputArray').value;
+
+            // Parse the input string into an array of numbers
+            const inputArray = inputArrayStr.split(',').map(Number);
+
+            if (!Array.isArray(inputArray) || inputArray.some(isNaN)) {
+                document.getElementById('result').textContent = 'Invalid input. Please enter a valid array.';
+                return;
+            }
+
+            const nonRepeatingElements = findUniqueElements(inputArray);
+
+            document.getElementById('result').textContent = `Non-Repeating Elements: [${nonRepeatingElements.join(', ')}]`;
+        }
+
+        function findUniqueElements(arr) {
+            const counts = {};
+
+            // Count the occurrences of each element in the array
+            for (const num of arr) {
+                if (counts[num] === undefined) {
+                    counts[num] = 1;
+                } else {
+                    counts[num]++;
+                }
+            }
+
+            const nonRepeatingElements = [];
+
+            // Find non-repeating elements by checking the counts
+            for (const num of arr) {
+                if (counts[num] === 1) {
+                    nonRepeatingElements.push(num);
+                }
+            }
+
+            return nonRepeatingElements;
+        }
+    </script>
+</body>
+</html>
